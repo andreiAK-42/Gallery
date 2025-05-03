@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="100dp"
+    android:orientation="horizontal"
+    android:layout_marginTop="10dp">
+
+    <ImageView
+        android:id="@+id/rview_image"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:background="#828188">
+
+    </ImageView>
+
+    <TextView
+        android:id="@+id/rview_description"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginStart="5dp"
+        android:layout_marginEnd="5dp"
+        android:maxLines="5"
+        android:text="Здесть должно быть описание но его не будет ведь Хемля  съел весь бублик">
+
+    </TextView>
+
+</LinearLayout>

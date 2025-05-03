@@ -1,11 +1,12 @@
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.jetbrains.kotlin.android)
+    id("kotlin-kapt")
 }
 
 android {
     namespace = "com.example.gallery"
-    compileSdk = 34
+    compileSdk = 35
 
     defaultConfig {
         applicationId = "com.example.gallery"
@@ -36,8 +37,7 @@ android {
 }
 
 dependencies {
-
-    implementation(libs.androidx.core.ktx)
+    
     implementation(libs.androidx.appcompat)
     implementation(libs.material)
     implementation(libs.androidx.activity)
@@ -45,4 +45,25 @@ dependencies {
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
+    implementation("androidx.core:core-ktx:1.12.0")
+    implementation("androidx.core:core:1.12.0")
+
+    implementation("androidx.fragment:fragment-ktx:1.8.6")
+
+
+    // Room architecture component dependencies
+    implementation("androidx.room:room-runtime:2.4.1")
+    kapt("androidx.room:room-compiler:2.4.1")
+    implementation("androidx.room:room-ktx:2.4.1")
+
+    //Live data and life cycles
+    implementation("androidx.lifecycle:lifecycle-extensions:2.2.0-rc03")
+    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.2.0-rc03")
+    implementation("androidx.lifecycle:lifecycle-livedata-ktx:2.2.0-rc03")
+
+    //Dagger
+    implementation("com.google.dagger:dagger:2.48.1")
+    kapt("com.google.dagger:dagger-compiler:2.48.1")
+
+    implementation("com.github.bumptech.glide:glide:4.12.0")
 }
