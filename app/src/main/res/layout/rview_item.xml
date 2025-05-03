@@ -9,7 +9,9 @@
         android:id="@+id/rview_image"
         android:layout_width="100dp"
         android:layout_height="100dp"
-        android:background="#828188">
+        android:background="#828188"
+        android:scaleType="fitXY"
+        >
 
     </ImageView>
 

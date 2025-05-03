@@ -3,10 +3,8 @@ package activity
 import activity.ui.mainAdapter
 import android.app.Activity
 import android.content.Intent
-import android.graphics.BitmapFactory
 import android.os.Bundle
 import android.widget.Button
-import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
@@ -14,7 +12,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.gallery.R
 import database.GalleryEntity
 import viewModel.mainViewModel
-import java.io.File
 
 class MainActivity : AppCompatActivity(), mainAdapter.OnGalleryAdapterListener {
     private val REQUEST_SELECT_IMAGE_IN_ALBUM = 2
@@ -61,11 +58,13 @@ class MainActivity : AppCompatActivity(), mainAdapter.OnGalleryAdapterListener {
 
 
     fun selectImageInAlbum() {
-        val intent = Intent(Intent.ACTION_GET_CONTENT)
-        intent.type = "image/*"
-        if (intent.resolveActivity(packageManager) != null) {
-            startActivityForResult(intent, REQUEST_SELECT_IMAGE_IN_ALBUM)
+        val intent = Intent(Intent.ACTION_OPEN_DOCUMENT).apply {
+            type = "image/*"
+         /*   addCategory(Intent.CATEGORY_OPENABLE)
+            addFlags(Intent.FLAG_GRANT_PERSISTABLE_URI_PERMISSION)
+            addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)*/
         }
+        startActivityForResult(intent, REQUEST_SELECT_IMAGE_IN_ALBUM)
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -74,6 +73,7 @@ class MainActivity : AppCompatActivity(), mainAdapter.OnGalleryAdapterListener {
         if (requestCode == REQUEST_SELECT_IMAGE_IN_ALBUM && resultCode == Activity.RESULT_OK) {
             data?.data?.let { uri ->
                 println("Выбранная папка: $uri")
+
 
                 viewModel.insertRecord(GalleryEntity(path = uri.toString(), description = ""))
                    // val inputStream = contentResolver.openInputStream(uri)
