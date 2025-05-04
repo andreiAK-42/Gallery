@@ -7,5 +7,5 @@ import androidx.room.PrimaryKey
 @Entity(tableName = "gallery_entity")
 class GalleryEntity(
     @PrimaryKey(autoGenerate = false)@ColumnInfo(name = "path") val path: String,
-    @ColumnInfo(name = "description") val description: String
+    @ColumnInfo(name = "description") var description: String
 )

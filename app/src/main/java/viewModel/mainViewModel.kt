@@ -1,9 +1,15 @@
 package viewModel
 
 import activity.myApp
+import android.app.AlertDialog
 import android.app.Application
+import android.content.Context
+import android.view.LayoutInflater
+import android.widget.Button
+import android.widget.EditText
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
+import com.example.gallery.R
 import database.appDao
 import database.GalleryEntity
 import kotlinx.coroutines.CoroutineScope

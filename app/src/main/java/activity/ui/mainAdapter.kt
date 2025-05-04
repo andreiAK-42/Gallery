@@ -1,11 +1,15 @@
 package activity.ui
 
 import activity.MainActivity
+import android.app.AlertDialog
+import android.content.Context
 import android.graphics.BitmapFactory
 import android.net.Uri
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
+import android.widget.EditText
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
@@ -42,6 +46,12 @@ class mainAdapter(
             .placeholder(R.drawable.ic_launcher_background)
             .error(R.drawable.ic_launcher_foreground)
             .into(holder.image)
+
+        holder.image.setOnLongClickListener {
+            listener.onUpdateDescription(picture)
+            true
+        }
+
     }
 
     fun deleteItem(position: Int) {
@@ -60,7 +70,9 @@ class mainAdapter(
         fun onNoteDelete(note: GalleryEntity)
         fun onNoteUpdate(note: GalleryEntity)
         fun onViewNote(note: GalleryEntity)
+        fun onUpdateDescription(picture: GalleryEntity)
     }
+
 
     override fun getItemCount(): Int {
         return pictureList.size

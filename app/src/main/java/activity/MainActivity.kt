@@ -2,9 +2,13 @@ package activity
 
 import activity.ui.mainAdapter
 import android.app.Activity
+import android.app.AlertDialog
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.view.LayoutInflater
 import android.widget.Button
+import android.widget.EditText
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
@@ -48,6 +52,27 @@ class MainActivity : AppCompatActivity(), mainAdapter.OnGalleryAdapterListener {
         viewModel.deleteRecord(note)
     }
 
+    override fun onUpdateDescription(picture: GalleryEntity) {
+        showDescriptionDialog(picture, this)
+    }
+
+    fun showDescriptionDialog(picture: GalleryEntity, context: Context) {
+        val dialogView = LayoutInflater.from(context).inflate(R.layout.description_dialog, null)
+        val descriptionValue = dialogView.findViewById<EditText>(R.id.et_description)
+
+        val dialog = AlertDialog.Builder(context)
+            .setView(dialogView)
+            .create()
+
+        dialogView.findViewById<Button>(R.id.okButton).setOnClickListener {
+            picture.description = descriptionValue.getText().toString()
+            viewModel.updateRecord(picture)
+            dialog.dismiss()
+        }
+
+        dialog.show()
+    }
+
     override fun onNoteUpdate(note: GalleryEntity) {
         viewModel.updateRecord(note)
     }
@@ -60,9 +85,9 @@ class MainActivity : AppCompatActivity(), mainAdapter.OnGalleryAdapterListener {
     fun selectImageInAlbum() {
         val intent = Intent(Intent.ACTION_OPEN_DOCUMENT).apply {
             type = "image/*"
-         /*   addCategory(Intent.CATEGORY_OPENABLE)
+            addCategory(Intent.CATEGORY_OPENABLE)
             addFlags(Intent.FLAG_GRANT_PERSISTABLE_URI_PERMISSION)
-            addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)*/
+            addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
         }
         startActivityForResult(intent, REQUEST_SELECT_IMAGE_IN_ALBUM)
     }
