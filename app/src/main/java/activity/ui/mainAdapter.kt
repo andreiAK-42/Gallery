@@ -14,6 +14,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.example.gallery.MainFragment
 import com.example.gallery.R
 import database.GalleryEntity
 import java.io.File
@@ -21,7 +22,7 @@ import java.net.URI
 
 class mainAdapter(
     private var pictureList: MutableList<GalleryEntity>,
-    private val listener: MainActivity
+    private val listener: MainFragment
 ) :
     RecyclerView.Adapter<mainAdapter.ViewHolder>() {
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
@@ -50,6 +51,10 @@ class mainAdapter(
         holder.image.setOnLongClickListener {
             listener.onUpdateDescription(picture)
             true
+        }
+
+        holder.image.setOnClickListener {
+            listener.onViewNote(picture)
         }
 
     }
